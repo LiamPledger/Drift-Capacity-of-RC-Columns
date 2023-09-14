@@ -1,0 +1,3 @@
+numpy
+lightgbm
+flask
