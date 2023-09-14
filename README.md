@@ -5,7 +5,7 @@ A total of 498 RC column tests  from the ACI-369 database (326 rectangular colum
 
 **Please get in touch if you would like to share more tests not currently included in the repository.**
 
-## RC Column Calculator
+## RC Column Drift Capacity Calculator
 ### Usage in python
 
 1. Clone or download this repository to your local machine.
