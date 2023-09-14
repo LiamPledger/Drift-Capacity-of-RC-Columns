@@ -3,10 +3,10 @@ This repository uses existing data for cyclic tests of RC columns to train a Gra
 
 A total of 498 RC column tests  from the ACI-369 database (326 rectangular columns, and 172 circular columns) are used to train the algorithm.
 
-Please get in touch if you would like to share more tests not currently included in the repository.
+**Please get in touch if you would like to share more tests not currently included in the repository.**
 
 ## RC Column Calculator
-### Usage
+### Usage in python
 
 1. Clone or download this repository to your local machine.
 
@@ -25,9 +25,28 @@ Please get in touch if you would like to share more tests not currently included
 - `ρt`: Transverse reinforcement ratio.
 - `v`: Axial load ratio.
 
-4. Run the Python script `Drift_capacity_calculator.py` to calculate the drift capacity:
-
+4. Run the Python script `drift_capacity_calculator.py` to calculate the drift capacity:
 The result will be displayed in the terminal.
 
-Feel free to contribute or report issues.
+### Web-user interface:
+Alternatively, if a web-user interface is preferred:
+
+1. Install the required Python packages:
+   
+   pip install -r requirements.txt
+3. Open a command prompt, locate the directory where the files have been saved and start the Flask web server:
+
+   - cd ~/Desktop/my_project  # On macOS and Linux
+   - cd C:\Users\YourUsername\Desktop\my_project  # On Windows
+     
+   - python run_web_server.py
+5. Fill in the input form with the required parameters:
+
+- Select units (metric or imperial).
+- Enter values for a, d, s, fc, fyl, fyt, ρl, ρt, and v.
+
+4. Click the "Submit" button to calculate the drift capacity.
+5. The estimated drift capacity will be displayed on the web page.
+
+**Feel free to contribute or report issues.**
 Happy calculating!
