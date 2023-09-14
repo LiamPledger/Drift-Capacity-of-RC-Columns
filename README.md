@@ -12,16 +12,16 @@ Please get in touch if you would like to share more tests not currently included
 
 3. Modify the `user_inputs.txt` file to specify the input parameters for your RC column. Ensure the file format is as follows:
 
-units: 1
-a: 1000.0
-d: 200.0
-s: 50.0
-fc: 30.0
-fyl: 500.0
-fyt: 500.0
-ρl: 0.02
-ρt: 0.005
-v: 0.2
+  units: 1
+  a: 1000.0
+  d: 200.0
+  s: 50.0
+  fc: 30.0
+  fyl: 500.0
+  fyt: 500.0
+  ρl: 0.02
+  ρt: 0.005
+  v: 0.2
 
 - `units`: 0 for metric units (mm, MPa), 1 for imperial units (inches, psi).
 - `a`: Shear span.
