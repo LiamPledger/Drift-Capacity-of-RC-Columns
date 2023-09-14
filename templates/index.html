@@ -1,0 +1,37 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RC Column Drift Capacity Calculator</title>
+</head>
+<body>
+    <h1>RC Column Drift Capacity Calculator</h1>
+    <form method="POST">
+        <label for="units">Select Units:</label>
+        <select name="units" id="units">
+            <option value="1">Imperial (inches, kips, psi)</option>
+            <option value="0">Metric (mm, kN, MPa)</option>
+        </select><br>
+        <label for="a">a (shear span):</label>
+        <input type="number" name="a" step="any" required><br>
+        <label for="d">d (column section depth):</label>
+        <input type="number" name="d" step="any" required><br>
+        <label for="s">s (transverse reinforcement spacing):</label>
+        <input type="number" name="s" step="any" required><br>
+        <label for="fc">f'c (concrete strength):</label>
+        <input type="number" name="fc" step="any" required><br>
+        <label for="fyl">fyl (longitudinal reinforcement yield strength):</label>
+        <input type="number" name="fyl" step="any" required><br>
+        <label for="fyt">fyt (transverse reinforcement yield strength):</label>
+        <input type="number" name="fyt" step="any" required><br>
+        <label for="ρl">ρl (longitudinal reinforcement ratio):</label>
+        <input type="number" name="ρl" step="any" required><br>
+        <label for="ρt">ρt (transverse reinforcement ratio):</label>
+        <input type="number" name="ρt" step="any" required><br>
+        <label for="v">N / (f'c * Ag) (Axial load ratio):</label>
+        <input type="number" name="v" step="any" required><br>
+        <input type="submit" value="Calculate">
+    </form>
+</body>
+</html>
