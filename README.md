@@ -1,6 +1,8 @@
 # Drift-Capacity-of-RC-Columns
 This repository uses existing data for cyclic tests of RC columns to train a Gradient-Boosted Decision Tree (GBDT) machine learning algorithm to estimate drift capacity. 
+
 A total of 498 RC column tests  from the ACI-369 database (326 rectangular columns, and 172 circular columns) are used to train the algorithm.
+
 Please get in touch if you would like to share more tests not currently included in the repository.
 
 ## RC Column Calculator
