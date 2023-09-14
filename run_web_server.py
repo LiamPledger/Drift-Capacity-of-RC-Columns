@@ -36,7 +36,7 @@ def index():
 
         # Run your Python script with the user inputs
         result = subprocess.run(
-            ['python', 'my_script.py'],
+            ['python', 'drift_capacity_calculator.py'],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
