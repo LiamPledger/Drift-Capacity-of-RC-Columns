@@ -19,11 +19,11 @@ A total of 498 RC column tests from the ACI-369 database (326 rectangular column
 - `d`: Column section depth.
 - `s`: Transverse reinforcement spacing.
 - `fc`: Concrete compressive strength.
-- `fyl`: Longitudinal reinforcement strength.
-- `fyt`: Transverse reinforcement strength.
-- `ρl`: Longitudinal reinforcement ratio.
-- `ρt`: Transverse reinforcement ratio.
-- `v`: Axial load ratio.
+- `fyl`: Longitudinal reinforcement yield strength.
+- `fyt`: Transverse reinforcement yield strength.
+- `ρl`: Longitudinal reinforcement area ratio.
+- `ρt`: Transverse reinforcement area ratio.
+- `v`: Axial load ratio (Considering gross concrete section, Ag).
 
 4. Run the Python script `drift_capacity_calculator.py` to calculate the drift capacity:
 The result will be displayed in the terminal.
@@ -33,13 +33,13 @@ Alternatively, if a web-user interface is preferred:
 
 1. Install the required Python packages:
    
-   pip install -r requirements.txt
+   **pip install -r requirements.txt**
 3. Open a command prompt, locate the directory where the files have been saved and start the Flask web server:
 
    - cd ~/Desktop/my_project  # On macOS and Linux
    - cd C:\Users\YourUsername\Desktop\my_project  # On Windows
      
-   - python run_web_server.py
+   - **python run_web_server.py**
 5. Fill in the input form with the required parameters:
 
 - Select units (metric or imperial).
