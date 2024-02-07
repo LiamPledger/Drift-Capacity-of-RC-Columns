@@ -20,6 +20,7 @@ def index():
         ρl = float(request.form['ρl'])
         ρt = float(request.form['ρt'])
         v = float(request.form['v'])
+        lbd = float(request.form['lbd'])
 
         # Store the user inputs in a text file (optional)
         with open('user_inputs.txt', 'w', encoding='utf-8') as file:
@@ -33,10 +34,11 @@ def index():
             file.write(f"ρl: {ρl}\n")
             file.write(f"ρt: {ρt}\n")
             file.write(f"v: {v}\n")
+            file.write(f"lbd: {lbd}\n")
 
         # Run your Python script with the user inputs
         result = subprocess.run(
-            ['python', 'drift_capacity_calculator.py'],
+            ['python', 'Drift Capacity Estimator.py'],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
