@@ -29,7 +29,7 @@ lbd = float(lines[10].strip().split(': ')[1])
 input_data = np.transpose(np.array([[a], [a/d], [fyt], [s/d], [fc], [v], [s/lbd], [a/s], [ρl*fyl], [ρt*fyt]], dtype=float))
 
 
-file = "RC columns updated 2.csv"
+file = "RC column database.csv"
 
 # Load data
 columns_to_load = [3, 4, 9, 11, 12, 14, 15, 16, 17, 18, 21]
