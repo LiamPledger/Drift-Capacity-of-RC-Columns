@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Sep  4 19:41:32 2023
-
-@author: ljp70
+Updated on Wed Feb  7 13:21:15 2024
+@author: Liam Pledger - liam.pledger@pg.canterbury.ac.nz
 """
 
 import lightgbm as lgb
 import numpy as np
-
+import pandas as pd
 
 # Open the user_inputs.txt file for reading
 with open('user_inputs.txt', 'r', encoding='utf-8') as file:
@@ -24,47 +24,42 @@ fyt = float(lines[6].strip().split(': ')[1])
 ρl = float(lines[7].strip().split(': ')[1])
 ρt = float(lines[8].strip().split(': ')[1])
 v = float(lines[9].strip().split(': ')[1])
+lbd = float(lines[10].strip().split(': ')[1])
 
-input_data = np.transpose(np.array([[a/d], [v], [s/a], [s/(a/d)], [fc], [ρl*fyl], [ρt*fyt]], dtype=float))
+input_data = np.transpose(np.array([[a], [a/d], [fyt], [s/d], [fc], [v], [s/lbd], [a/s], [ρl*fyl], [ρt*fyt]], dtype=float))
 
 
-if units == 1:
-    a = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 0) 
-    d = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 17)
-    s = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 5) 
-    row_t = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 6)
-    ALR = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 9)
-    fyt = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 15)
-    fc = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 16)
-    fy = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 3)
-    row_l = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 4)
+file = "RC columns updated 2.csv"
+
+# Load data
+columns_to_load = [3, 4, 9, 11, 12, 14, 15, 16, 17, 18, 21]
+feature_labels = ['a', 
+                  'a/d', 
+                  r'$f_{yt}$',
+                  's/d',       
+                  r'$f_{c}$',            
+                  'ALR', 
+                  r'$s/d_{lb}$',
+                  r'$a/s$',
+                  r'$\rho_l \times f_y$',
+                  r'$\rho_t \times f_{yt}$',
+                  ]
+
+
+data = pd.read_csv(file, skiprows=1, delimiter=",", usecols=columns_to_load)
+
+# Extract features and labels
+X = data.iloc[:, :-1].values
+Y = data.iloc[:, -1].values
+
+
+if units != 1:  # converting units from the database of column to imperial based on input by user. 
+    X[:, 0] = X[:, 0] * 25.4  # a, aspect ratio
+    X[:, 2] = X[:, 2] / 145   # fyt, yield strength of transverse reinforcement
+    X[:, 4] = X[:, 4] / 145   # fc, compressive strength of concrete
+    X[:, 8] = X[:, 8] / 145   # ρl*fyl
+    X[:, 9] = X[:, 9] / 145   # ρt*fyt
     
-    s_a = s / a
-    s_a_d2 = s / (a/d)
-
-else:
-    a = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 0) * 25.4
-    d = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 17) * 25.4
-    s = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 5)  * 25.4
-    row_t = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 6)
-    row_l = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 4)
-    fyt = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 15) / 145
-    fc = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 16) / 145
-    fy = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 3) / 145
-    ALR = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 9)
-    s_a = s / a
-    s_a_d2 = s / (a/d)
-
-
-Drift_Capacity = np.loadtxt("RC columns.csv", skiprows=1, delimiter = ",", usecols = 13)
-
-
-X = np.stack((a/d, ALR, s_a, s_a_d2, fc, row_l * fy, row_t * fyt), axis = 1)
-
-Y = Drift_Capacity
-
-
-
 
 # Create a LightGBM dataset for training
 train_data = lgb.Dataset(X, label=Y)
@@ -73,7 +68,7 @@ train_data = lgb.Dataset(X, label=Y)
 params = {
     'boosting_type': 'gbdt',
     'metric': 'binary_logloss',
-    'max_bin' : 300,
+    'max_bin' : 50,
     'learning_rate': 0.0075,
     'feature_fraction': 0.4,
 }
@@ -82,21 +77,15 @@ params = {
 params['verbose'] = -1  # Set verbose to -1 to suppress warnings
 
 # Train the LightGBM model
-num_round = 3000
+num_round = 10000
 bst = lgb.train(params, train_data, num_round)
 
 # Make predictions on the test data
 y_pred = bst.predict(input_data, num_iteration=bst.best_iteration)
 
 
-feature_importance = bst.feature_importance(importance_type='gain')
-feature_importance = feature_importance/ sum(feature_importance)
-
-# Print or visualize feature importances
-# print("Feature Importance (gain):", np.round(feature_importance, 2))
 print("""
             
       
       """)
 print("The estimated drift capacity of the column is = " + str(np.round(y_pred[0], 1)) + " %")
-
