@@ -1,7 +1,7 @@
 # Drift-Capacity-of-RC-Columns
 This repository uses existing data of cyclic tests of RC columns to train a Gradient-Boosted Decision Tree (GBDT) machine learning algorithm to estimate drift capacity. 
 
-A total of 498 RC column tests from the ACI-369 database (326 rectangular columns, and 172 circular columns) are used to train the algorithm.
+A total of 341 RC column tests from the ACI-369 database are used to train the algorithm.
 
 **Please get in touch if you would like to share more tests not currently included in the repository.**
 
@@ -18,6 +18,7 @@ A total of 498 RC column tests from the ACI-369 database (326 rectangular column
 - `a`: Shear span.
 - `d`: Column section depth.
 - `s`: Transverse reinforcement spacing.
+- `ldb` : longitudinal bar diameter.
 - `fc`: Concrete compressive strength.
 - `fyl`: Longitudinal reinforcement yield strength.
 - `fyt`: Transverse reinforcement yield strength.
