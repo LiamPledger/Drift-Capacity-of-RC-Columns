@@ -17,8 +17,8 @@ A total of 341 RC column tests from the ACI-369 database are used to train the a
 - `units`: 0 for metric units (mm, MPa), 1 for imperial units (inches, psi).
 - `a`: Shear span.
 - `d`: Column section depth.
-- `s`: Transverse reinforcement spacing.
-- `ldb` : longitudinal bar diameter.
+- `s`: Spacing of transverse reinfrocement.
+- `ldb` : Longitudinal bar diameter.
 - `fc`: Concrete compressive strength.
 - `fyl`: Longitudinal reinforcement yield strength.
 - `fyt`: Transverse reinforcement yield strength.
