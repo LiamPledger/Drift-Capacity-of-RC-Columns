@@ -10,7 +10,7 @@ A total of 341 RC column tests from the ACI-369 database are used to train the a
 
 1. Clone or download this repository to your local machine.
 
-2. Ensure you have Python and the required libraries (NumPy, LightGBM) installed.
+2. Ensure you have Python and the required libraries (NumPy, Pandas, LightGBM) installed.
 
 3. Modify the `user_inputs.txt` file to specify the input parameters for your RC column. Ensure the file format is as follows:
 
