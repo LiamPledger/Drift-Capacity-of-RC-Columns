@@ -1,4 +1,4 @@
-# app.py
+# run_web_server.py
 
 import webbrowser  # Import the webbrowser module
 
@@ -38,7 +38,7 @@ def index():
 
         # Run your Python script with the user inputs
         result = subprocess.run(
-            ['python', 'Drift Capacity Estimator.py'],
+            ['python', 'drift_capacity_calculator.py'],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
