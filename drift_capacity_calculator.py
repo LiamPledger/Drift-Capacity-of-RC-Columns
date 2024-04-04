@@ -77,7 +77,7 @@ params = {
 params['verbose'] = -1  # Set verbose to -1 to suppress warnings
 
 # Train the LightGBM model
-num_round = 10000
+num_round = 5000
 bst = lgb.train(params, train_data, num_round)
 
 # Make predictions on the test data
@@ -89,3 +89,4 @@ print("""
       
       """)
 print("The estimated drift capacity of the column is = " + str(np.round(y_pred[0], 1)) + " %")
+
