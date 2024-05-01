@@ -28,29 +28,15 @@ lbd = float(lines[10].strip().split(': ')[1])
 
 input_data = np.transpose(np.array([[a], [a/d], [fyt], [s/d], [fc], [v], [s/lbd], [a/s], [ρl*fyl], [ρt*fyt]], dtype=float))
 
-
 file = "RC column database.csv"
 
 # Load data
 columns_to_load = [3, 4, 9, 11, 12, 14, 15, 16, 17, 18, 21]
-feature_labels = ['a', 
-                  'a/d', 
-                  r'$f_{yt}$',
-                  's/d',       
-                  r'$f_{c}$',            
-                  'ALR', 
-                  r'$s/d_{lb}$',
-                  r'$a/s$',
-                  r'$\rho_l \times f_y$',
-                  r'$\rho_t \times f_{yt}$',
-                  ]
-
-
 data = pd.read_csv(file, skiprows=1, delimiter=",", usecols=columns_to_load)
 
 # Extract features and labels
-X = data.iloc[:, :-1].values
-Y = data.iloc[:, -1].values
+X = data.iloc[:, :-1].values  # Measured drift capacity
+Y = data.iloc[:, -1].values   # Column properties 
 
 
 if units != 1:  # converting units from the database of column to imperial based on input by user. 
